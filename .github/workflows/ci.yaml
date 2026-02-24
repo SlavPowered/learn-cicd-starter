@@ -18,8 +18,14 @@ jobs:
         with:
           go-version: "1.25.1"
 
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
       - name: Run unit tests
         run: (go test -cover ./...)
+      
+      - name: Perform gosec checkout
+        run: test -z "$(gosec ./...)"
   
   style:
     name: style
@@ -37,16 +43,12 @@ jobs:
       - name: Install staticcheck
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
-      - name: Install gosec
-        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
-
       - name: Check code styling
         run: test -z $(go fmt ./...)
 
       - name: Perform static checkout
         run: test -z "$(staticcheck ./...)"
       
-      - name: Perform gosec checkout
-        run: test -z "$(gosec ./...)"
+      
 
       
