@@ -38,9 +38,9 @@ jobs:
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
       - name: Check code styling
-        run: (test -z $(go fmt ./...))
+        run: test -z $(go fmt ./...)
 
       - name: Perform static checkout
-        run: test -z $(staticcheck ./...)
+        run: test -z "$(staticcheck ./...)"
 
       
