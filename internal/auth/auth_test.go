@@ -19,7 +19,7 @@ func TestAuth(t *testing.T) {
 
 	// Test missing header
 	headers = http.Header{}
-	key, err = GetAPIKey(headers)
+	_, err = GetAPIKey(headers)
 	if err == nil {
 		t.Error("Expected error for missing header, got nil")
 	}
@@ -29,7 +29,7 @@ func TestAuth(t *testing.T) {
 
 	// Test malformed header
 	headers.Set("Authorization", "Bearer token")
-	key, err = GetAPIKey(headers)
+	_, err = GetAPIKey(headers)
 	if err == nil {
 		t.Error("Expected error for malformed header, got nil")
 	}
