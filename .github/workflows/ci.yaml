@@ -46,7 +46,7 @@ jobs:
       - name: Check code styling
         run: test -z $(go fmt ./...)
 
-      - name: Perform static checkout
+      - name: Perform static check
         run: test -z "$(staticcheck ./...)"
       
       
